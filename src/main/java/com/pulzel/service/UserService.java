@@ -9,21 +9,22 @@ import java.util.List;
 
 @Service
 public class UserService implements IUserService {
-	@Autowired
-	private IUserDAO userDAO;
+    @Autowired
+    private IUserDAO userDAO;
 
-	@Override
-	public List<User> getAllUsers(){
-		return userDAO.getAllUser();
-	}
-	@Override
-	public synchronized boolean addUser(User user){
-       if (userDAO.userExists(user.getNational_code())) {
-    	   return false;
-       } else {
-    	   userDAO.addUser(user);
-    	   return true;
-       }
-	}
+    @Override
+    public List<User> getAllUsers() {
+        return userDAO.getAllUser();
+    }
+
+    @Override
+    public synchronized boolean addUser(User user) {
+        if (userDAO.userExists(user.getNational_code())) {
+            return false;
+        } else {
+            userDAO.addUser(user);
+            return true;
+        }
+    }
 
 }

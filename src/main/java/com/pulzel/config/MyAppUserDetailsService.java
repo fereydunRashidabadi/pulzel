@@ -12,18 +12,20 @@ import org.springframework.stereotype.Service;
 
 import com.pulzel.dao.IUserDAO;
 import com.pulzel.entity.User;
+
 @Service
 public class MyAppUserDetailsService implements UserDetailsService {
-	@Autowired
-	private IUserDAO userDAO;
-	@Override
-	public UserDetails loadUserByUsername(String userName)
-			throws UsernameNotFoundException {
-		User activeUser = userDAO.getActiveUser(userName);
-		GrantedAuthority authority = new SimpleGrantedAuthority(activeUser.getRole());
-		UserDetails userDetails = (UserDetails)new org.springframework.security.core.userdetails.User(activeUser.getUserName(),
-				activeUser.getPassword(), Arrays.asList(authority));
-		return userDetails;
-	}
+    @Autowired
+    private IUserDAO userDAO;
+
+    @Override
+    public UserDetails loadUserByUsername(String userName)
+            throws UsernameNotFoundException {
+        User activeUser = userDAO.getActiveUser(userName);
+        GrantedAuthority authority = new SimpleGrantedAuthority(activeUser.getRole());
+        UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(activeUser.getUserName(),
+                activeUser.getPassword(), Arrays.asList(authority));
+        return userDetails;
+    }
 }
 

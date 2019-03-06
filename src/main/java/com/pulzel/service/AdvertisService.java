@@ -9,30 +9,35 @@ import java.util.List;
 
 @Service
 public class AdvertisService implements IAdvertisService {
-	@Autowired
-	private IAdvertisDAO advertisDAO;
-	@Override
-	public Advertis getAdvertisById(int advertisId) {
-		Advertis obj = advertisDAO.getAdvertisById(advertisId);
-		return obj;
-	}	
-	@Override
-	public List<Advertis> getAllAdvertises(){
-		return advertisDAO.getAllAdvertises();
-	}
-	@Override
-	public synchronized boolean addAdvertis(Advertis advertis){
+    @Autowired
+    private IAdvertisDAO advertisDAO;
 
-    	   advertisDAO.addAdvertis(advertis);
-    	   return true;
+    @Override
+    public Advertis getAdvertisById(int advertisId) {
+        Advertis obj = advertisDAO.getAdvertisById(advertisId);
+        return obj;
+    }
 
-	}
-	@Override
-	public void updateAdvertis(Advertis advertis) {
-		advertisDAO.updateAdvertis(advertis);
-	}
-	@Override
-	public void deleteAdvertis(int advertisId) {
-		advertisDAO.deleteAdvertis(advertisId);
-	}
+    @Override
+    public List<Advertis> getAllAdvertises() {
+        return advertisDAO.getAllAdvertises();
+    }
+
+    @Override
+    public synchronized boolean addAdvertis(Advertis advertis) {
+
+        advertisDAO.addAdvertis(advertis);
+        return true;
+
+    }
+
+    @Override
+    public void updateAdvertis(Advertis advertis) {
+        advertisDAO.updateAdvertis(advertis);
+    }
+
+    @Override
+    public void deleteAdvertis(int advertisId) {
+        advertisDAO.deleteAdvertis(advertisId);
+    }
 }
