@@ -1,7 +1,7 @@
 package com.pulzel.controller;
 
 import com.pulzel.entity.Advertis;
-import com.pulzel.service.IAdvertisService;
+import com.pulzel.service.api.IAdvertisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

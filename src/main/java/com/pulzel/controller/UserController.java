@@ -1,7 +1,7 @@
 package com.pulzel.controller;
 
 import com.pulzel.entity.User;
-import com.pulzel.service.IUserService;
+import com.pulzel.service.api.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
