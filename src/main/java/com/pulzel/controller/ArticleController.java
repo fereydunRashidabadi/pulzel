@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.pulzel.entity.Article;
-import com.pulzel.service.IArticleService;
+import com.pulzel.service.api.IArticleService;
 
 @Controller
 @RequestMapping("/")

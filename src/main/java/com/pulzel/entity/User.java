@@ -1,10 +1,10 @@
 package com.pulzel.entity;
 
+
 import lombok.Data;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String card_number;
 
     @Column(name = "mobile_number")
-    private String mobile_number;
+    private String mobileNumber;
 
     @Column(name = "national_code")
     private String national_code;
