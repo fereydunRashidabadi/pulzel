@@ -1,7 +1,9 @@
 package com.pulzel.controller;
 
-import com.pulzel.entity.User;
-import com.pulzel.service.api.IUserService;
+import com.pulzel.entity.AppUser;
+import com.pulzel.service.IRolService;
+import com.pulzel.service.IUserService;
+import com.pulzel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,23 +17,35 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
-	@Autowired
-	private IUserService userService;
 
-	@GetMapping("users")
-	public ResponseEntity<List<User>> getAllArticles() {
-		List<User> list = userService.getAllUsers();
-		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
-	}
 
-	@PostMapping("user")
-	public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder builder) {
-		boolean flag = userService.addUser(user);
-		if (flag == false) {
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	}
-} 
+    @Autowired
+    private IUserService iUserService;
+
+
+    @RequestMapping(value = "/userGet", method = RequestMethod.GET)
+    public ResponseEntity<List<AppUser>> getAllUser() {
+        List<AppUser> list = iUserService.getAllUsers();
+        return new ResponseEntity<List<AppUser>>(list, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<Void> addUser(@RequestBody AppUser appUser, UriComponentsBuilder builder) {
+        iUserService.saveUser(appUser);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/userUpdate/{mobileNumber}", method = RequestMethod.POST)
+    public ResponseEntity<Void> updateUser(@PathVariable("mobileNumber") String mobileNumber,@RequestBody AppUser appUser, UriComponentsBuilder builder) {
+        iUserService.updateUser(mobileNumber,appUser);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/user/{mobileNumber}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteUser(@PathVariable("mobileNumber") String mobileNumber, UriComponentsBuilder builder) {
+        iUserService.deleteUser(mobileNumber);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+
+}
