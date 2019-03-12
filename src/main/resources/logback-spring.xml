@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration debug="true" scan="true"
+               scanPeriod="10 seconds">
 
     <property name="LOGS" value="./logs" />
 
@@ -27,13 +28,25 @@
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
+                <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 1GB -->
+                <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 
+    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>oracle.jdbc.OracleDriver</driverClass>
+            <url>jdbc:oracle:thin:@//localhost:1521/orclcntr</url>
+            <user>test</user>
+            <password>test</password>
+        </connectionSource>
+    </appender>
+
+
     <!-- LOG everything at INFO level -->
     <root level="info">
+        <appender-ref ref="DB" />
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>

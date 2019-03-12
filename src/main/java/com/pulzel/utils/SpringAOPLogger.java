@@ -19,12 +19,12 @@ public class SpringAOPLogger {
         final Logger logger = LoggerFactory.getLogger(targetClass);
         try {
             final String className = targetClass.getSimpleName();
-            logger.debug(getPreMessage(joinPoint, className));
+            logger.info(getPreMessage(joinPoint, className));
             final StopWatch stopWatch = new StopWatch();
             stopWatch.start();
             final Object retVal = joinPoint.proceed();
             stopWatch.stop();
-            logger.debug(getPostMessage(joinPoint, className, stopWatch.getTotalTimeMillis()));
+            logger.info(getPostMessage(joinPoint, className, stopWatch.getTotalTimeMillis()));
             return retVal;
         } catch ( final Throwable ex ) {
             logger.error(getErrorMessage(ex), ex);
