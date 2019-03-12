@@ -37,7 +37,6 @@ public class MainController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
         model.addAttribute(HttpStatus.OK);
-        logger.info("page login ********************");
         return "loginPage";
     }
 
